@@ -1,5 +1,3 @@
-package DFS;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +17,27 @@ public class Permutation {
 // Output: [[1]]
 
     public static List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        dfs(nums, 0, res);
+        return res;
+    }
 
+    public static void dfs(int[] nums, int index, List<List<Integer>> res) {
+        if (index == nums.length) {
+            List<Integer> tmp = new ArrayList<>();
+            for (int num: nums) tmp.add(num);
+            res.add(tmp);
+            return;
+        }
+        for (int i = index; i < nums.length; i++) {
+            swap(nums, index, i);
+            dfs(nums, index+1, res);
+            swap(nums, index, i);
+        }
+    }
+    public static void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
     }
 }

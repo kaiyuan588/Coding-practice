@@ -1,5 +1,4 @@
-package DFS;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class Subsets {
@@ -15,7 +14,19 @@ public class Subsets {
 // Input: nums = [0]
 // Output: [[],[0]]
     public static List<List<Integer>> subsets(int[] nums) {
-        
+        List<List<Integer>> res = new ArrayList<>();
+        dfs(nums, 0, new ArrayList<>(), res);
+        return res;
+    }
+    public static void dfs(int[] nums, int index, List<Integer> path, List<List<Integer>> res) {
+        if (index == nums.length) {
+            res.add(new ArrayList<>(path));
+            return ;
+        }
+        path.add(nums[index]);
+        dfs(nums, index+1, path, res);
+        path.remove(path.size()-1);
+        dfs(nums, index+1, path, res);
     }
 
 }
